@@ -19,7 +19,7 @@ class HangpersonGame
   attr_accessor(:wrong_guesses)
 
   def guess(letter)
-    if letter == nil || letter.match(/^[[:alpha:]]+$/) == nil then raise ArgumentError, 'Argument is invalid' end
+    if letter == nil ||  letter.match(/^[[:alpha:]]+$/) == nil then return '' end
     letter.downcase!
     if /#{letter}/.match(@word) != nil then
       if /#{letter}/.match(@guesses) == nil then
@@ -54,7 +54,7 @@ class HangpersonGame
   def check_win_or_lose
     if word_with_guesses == @word then 
       return :win
-    elsif @guesses.length + @wrong_guesses.length >= 7 then
+    elsif @wrong_guesses.length == 7 then
       return :lose
     else
       return :play

@@ -10,7 +10,33 @@ class HangpersonGame
   
   def initialize(word)
     @word = word
+    @guesses = ''
+    @wrong_guesses = ''
   end
+  
+  attr_accessor(:word)
+  attr_accessor(:guesses)
+  attr_accessor(:wrong_guesses)
+
+  def guess(letter)
+    letter.downcase!
+    if /#{letter}/.match(@word) != nil then
+      if /#{letter}/.match(@guesses) == nil then
+        @guesses << letter
+        return true
+      else
+        return false
+      end
+    else
+      if /#{letter}/.match(@wrong_guesses) == nil then
+        @wrong_guesses << letter
+        return true
+      else
+        return false
+      end
+    end
+  end
+    
 
   def self.get_random_word
     require 'uri'
